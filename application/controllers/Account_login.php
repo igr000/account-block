@@ -76,25 +76,29 @@ class Account_login extends CI_Controller{
 
 	}
 
-	//unblock_login() -->
+	//unblock_login() --> method that will load the unblock_login page
 	public function unblock_login(){
         $data['prompt'] = 'Enter username and password to unblock your account';
+        //let's the unblock_login page use $prompt
 		$this->load->view('unblock_login', $data);
 
 	}
 
-	//
+	//unblock_verify() --> method that will validate if inputs from unblock_login page abide by the set of rules
 	public function unblock_verify(){
 
 		$this->form_validation->set_rules('txtuser', 'Username', 'required');
 		$this->form_validation->set_rules('txtpass', 'Password', 'required|callback_check_user');
 
 		if($this->form_validation->run() == TRUE){
-            //
+            //if inputs abide by the set of rules:
+            //set 'txtuser' to $username
             $username = $this->input->post('txtuser');
+            //load unblock method of accounts_login_model with $username as parameter
 			$this->accounts_login_model->unblock($username);
 
 		}else{
+			//if inputs didn't abide by set of rules, go back to unblock_login page
 			$this->unblock_login();
 		}
 	}

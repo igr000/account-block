@@ -91,7 +91,7 @@ class accounts_login_model extends CI_model{
 
 	}
 
-    //unblock() -->
+    //unblock() --> method that will unblock an account
 	public function unblock($username){
         
         //SELECT 'acc_username' FROM 'accounts' WHERE 'acc_username' = $username
@@ -100,8 +100,10 @@ class accounts_login_model extends CI_model{
 		$unblocked = $this->db->update('accounts', array('acc_isBlocked' => 0));
 
 		if($unblocked){
+			//if account has been unblocked, load unblock_success page
 			$this->load->view('unblock_success');
 		}else{
+			//if account has not been unblocked, load unblock_fail page
 			$this->load->view('unblock_fail');
 		}
 	}
