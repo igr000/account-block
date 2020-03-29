@@ -100,9 +100,9 @@ class accounts_login_model extends CI_model{
 		$unblocked = $this->db->update('accounts', array('acc_isBlocked' => 0));
 
 		if($unblocked){
-			echo "Your account is now unblocked!";
+			$this->load->view('unblock_success');
 		}else{
-			echo "Failed to unblock your account";
+			$this->load->view('unblock_fail');
 		}
 	}
 }

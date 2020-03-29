@@ -3,12 +3,8 @@
 <head>
 	<title>Unblock Account</title>
 	<style type="text/css">
-		body{
+		html{
 			background: #FDF2E9;
-            background: -webkit-linear-gradient(left, #F5CBA7, #FDF2E9);
-            background: -o-linear-gradient(left, #F5CBA7, #FDF2E9);
-            background: -moz-linear-gradient(left, #F5CBA7, #FDF2E9);
-            background: linear-gradient(left, #F5CBA7, #FDF2E9);
 		}
 	</style>
 </head>
