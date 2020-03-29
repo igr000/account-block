@@ -53,12 +53,17 @@ class accounts_login_model extends CI_model{
     
     //block() --> method that will send email to the acc_email if the user account is blocked
 	public function block($username){
+
+		//initialize email
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'iso-8859-1';
+        $this->email->initialize($config);
         
         //use account_lookup method as $email
 		$email = $this->account_lookup($username, 'acc_email');
         
         //sender
-		$this->email->from('lslayugan@feutech.edu.ph', 'Your Website');
+		$this->email->from('rollingsketches@gmail.com', 'Your Website');
 		//recipient
 		$this->email->to($email);
 		//email subject
@@ -84,6 +89,21 @@ class accounts_login_model extends CI_model{
 
 		return $row->$return;
 
+	}
+
+    //unblock() -->
+	public function unblock($username){
+        
+        //SELECT 'acc_username' FROM 'accounts' WHERE 'acc_username' = $username
+		$this->db->where('acc_username', $username);
+		//change the selected account's 'acc_isBlocked' field from 1 to 0
+		$unblocked = $this->db->update('accounts', array('acc_isBlocked' => 0));
+
+		if($unblocked){
+			echo "Your account is now unblocked!";
+		}else{
+			echo "Failed to unblock your account";
+		}
 	}
 }
 ?>

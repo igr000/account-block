@@ -75,5 +75,31 @@ class Account_login extends CI_Controller{
 
 
 	}
+
+	//unblock_login() -->
+	public function unblock_login(){
+        $data['prompt'] = 'Enter username and password to unblock your account';
+		$this->load->view('unblock_login', $data);
+
+	}
+
+	//
+	public function unblock_verify(){
+
+		$this->form_validation->set_rules('txtuser', 'Username', 'required');
+		$this->form_validation->set_rules('txtpass', 'Password', 'required|callback_check_user');
+
+		if($this->form_validation->run() == TRUE){
+            //
+            $username = $this->input->post('txtuser');
+			$this->accounts_login_model->unblock($username);
+
+		}else{
+			$this->unblock_login();
+		}
+	}
+
+
+
 }
 ?>
